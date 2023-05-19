@@ -1,6 +1,8 @@
 const http = require('http');
-const fs = require('fs');
 var request = require('request');
+var fs = require('fs');
+
+const PORT = 5500;
 
 const homeFile = fs.readFileSync('app.html', 'utf-8');
 
@@ -19,7 +21,7 @@ const replaceVal = (tempVal, orgVal) => {
 const server = http.createServer((req, res) => {
     if (req.url == '/app.html') {
         request(
-            `https://api.openweathermap.org/data/2.5/weather?q=hyderabad&units=metric&appid=87701a465e8ce5ae9f78bf6a6f87a35b`
+            `https://api.openweathermap.org/data/2.5/weather?q=bangalore&units=metric&appid=87701a465e8ce5ae9f78bf6a6f87a35b`
         )
             .on('data', (chunk) => {
                 const objData = JSON.parse(chunk);
@@ -40,4 +42,6 @@ const server = http.createServer((req, res) => {
     }
 });
 
-server.listen(5500, "127.0.0.1");
+server.listen(PORT, "127.0.0.1", () => {
+    console.log(`Server is running on port ${PORT}`);
+});

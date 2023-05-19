@@ -21,13 +21,30 @@
         }
 
         body {
-            background: #f3f2ef;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
             height: 100vh;
             width: 100vw;
+
+            background: linear-gradient(45deg, #b8fff0, #e2f2ca, #ffcded);
+            background-size: 200% 200%;
+            animation: gradientAnimation 10s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         html,
@@ -216,27 +233,84 @@
             text-align: center;
             color: grey;
         }
+
+        .search {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .search input {
+            width: 100%;
+            padding: 10px;
+            font-size: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        .search input:focus {
+            border-color: #00ff22;
+            outline: none;
+        }
+
+        .search button {
+            padding: 7.5px 10px 5px 10px;
+            font-size: 17px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .search button:hover {
+            background-color: #45a049;
+        }
+
+        .search button:active {
+            transform: scale(0.95);
+        }
+    </style>
     </style>
 </head>
 
 <body>
-    <div class="box">
-        <div class="wave -one"></div>
-        <div class="wave -two"></div>
-        <div class="wave -three"></div>
+    <div class="card">
 
-        <div id="weathercon">
-            <i class="fas fa-sharp fa-solid fa-sun fa-2xl" style="color: #eccc68;"></i>
+        <div class="search">
+            <input type="text" class="search-bar" id="locationInput" placeholder="Enter location">
+            <button id="fetchButton"><svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                    viewBox="0 0 1024 1024" height="1.5em" width="1.5em" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z">
+                    </path>
+                </svg></button>
+
         </div>
 
-        <div class="info">
-            <h2 class="location">
-                <i class="fas fa-sharp fa-solid fa-street-view fa-2xl" style="color: black;"></i>
-                {%location%}, {%country%}
-            </h2>
-            <p id="date"></p>
-            <h1 class="temp">{%tempval%}&deg; C</h1>
-            <h3 class="temp_min_max">Min {%tempmin%}&deg; C | Max {%tempmax%}&deg; C</h3>
+
+        <div class="box">
+            <div class="wave -one"></div>
+            <div class="wave -two"></div>
+            <div class="wave -three"></div>
+
+            <div id="weathercon">
+                <i class="fas fa-sharp fa-solid fa-sun fa-2xl" style="color: #eccc68;"></i>
+            </div>
+
+            <div class="info">
+                <h2 class="location">
+                    <i class="fas fa-sharp fa-solid fa-street-view fa-2xl" style="color: black;"></i>
+                    {%location%}, {%country%}
+                </h2>
+                <p id="date"></p>
+                <h1 class="temp">  {%tempval%}&deg; C </h1>
+                <h3 class="temp_min_max">  Min {%tempmin%}&deg; C | Max {%tempmax%}&deg; C </h3>
+            </div>
         </div>
     </div>
 
@@ -248,7 +322,7 @@
 
         const tempStatus = "{%tempstatus%}";
 
-        //condition to check sunny or cloudy
+        // condition to check sunny or cloudy
         if (tempStatus == "Sunny") {
             weathercon.innerHTML =
                 "<i class='fas  fa-sun' style='color: #eccc68;'></i>";
@@ -271,8 +345,24 @@
             let currentday = current.getDay();
             let currentDate = current.getDate();
             let currentMonth = current.getMonth();
-            let currentTime = current.toLocaleTimeString();
-            // console.log("Welkcone");
+
+            let hours = current.getHours();
+            let mins = current.getMinutes();
+            let seco = current.getSeconds();
+
+            let periods = "AM";
+
+            if (hours > 11) {
+                periods = "PM";
+                if (hours > 12) hours -= 12;
+            }
+            if (mins < 10) {
+                mins = "0" + mins;
+            }
+
+            let currentTime = `${hours}:${mins}:${seco} ${periods}`;
+
+            // console.log(`${weekday[currentday]} | ${month[currentMonth]} ${currentDate} | ${currentTime}`);
 
             curDate.innerHTML = `${weekday[currentday]} | ${month[currentMonth]} ${currentDate} | ${currentTime}`;
 

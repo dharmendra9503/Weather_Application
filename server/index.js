@@ -1,10 +1,17 @@
 const http = require('http');
 var request = require('request');
 var fs = require('fs');
+const path = require('path');
 
-const PORT = 5500;
+const PORT = 3000;
 
-const homeFile = fs.readFileSync('app.html', 'utf-8');
+
+const viewPath = path.resolve(__dirname, '../client/templetes/views/index.hbs');
+const cssPath = path.resolve(__dirname, '../client/public/css/app.css');
+const jsPath = path.resolve(__dirname, '../client/public/js/app.js');
+console.log(viewPath);
+
+const homeFile = fs.readFileSync(viewPath).toString('utf8');
 
 const replaceVal = (tempVal, orgVal) => {
     let changes = tempVal.replace("{%tempval%}", orgVal.main.temp);
@@ -14,12 +21,11 @@ const replaceVal = (tempVal, orgVal) => {
     changes = changes.replace("{%country%}", orgVal.sys.country);
     changes = changes.replace("{%tempstatus%}", orgVal.weather[0].main);
 
-
     return changes;
 }
 
 const server = http.createServer((req, res) => {
-    if (req.url == '/app.html') {
+    if (req.url == '/') {
         request(
             `https://api.openweathermap.org/data/2.5/weather?q=bangalore&units=metric&appid=87701a465e8ce5ae9f78bf6a6f87a35b`
         )
@@ -42,6 +48,6 @@ const server = http.createServer((req, res) => {
     }
 });
 
-server.listen(PORT, "127.0.0.1", () => {
+server.listen(PORT, 'localhost', () => {
     console.log(`Server is running on port ${PORT}`);
 });

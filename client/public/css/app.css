@@ -7,13 +7,30 @@
 }
 
 body {
-    background: #f3f2ef;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     height: 100vh;
     width: 100vw;
+
+    background: linear-gradient(45deg, #b8fff0, #e2f2ca, #ffcded);
+    background-size: 200% 200%;
+    animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 html,
@@ -98,6 +115,7 @@ html {
 
 .location {
     margin-top: 1.5rem;
+    margin-bottom: 1rem;
     text-align: center;
     font-weight: 700;
     font-size: 3rem;
@@ -107,8 +125,8 @@ html {
     animation: rotates 3s linear infinite alternate;
 }
 
-.location .fas{
-    font-size: 4rem;
+.location .fas {
+    font-size: 3rem;
 }
 
 @keyframes rotates {
@@ -200,4 +218,45 @@ body>span {
     width: 100vw;
     text-align: center;
     color: grey;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.search input {
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.search input:focus {
+    border-color: #00ff22;
+    outline: none;
+}
+
+.search button {
+    padding: 7.5px 10px 5px 10px;
+    font-size: 17px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.search button:hover {
+    background-color: #45a049;
+}
+
+.search button:active {
+    transform: scale(0.95);
 }

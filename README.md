@@ -25,7 +25,7 @@ OR
 
 
 # Note
-_create config.js and below code in config.js_ || **Path: Weather-Application/config.js**
+_create config.js and copy below code and paste into config.js_ || **Path: Weather-Application/config.js**
 
     const constants = {
          openWeatherMap: {

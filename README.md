@@ -34,3 +34,8 @@ _create config.js and below code in config.js_ || **Path: Weather-Application/co
          }
     }
     module.exports = constants;
+
+
+
+# Preview
+![image](https://github.com/dharmendra9503/Weather_Application/assets/106586865/94af566a-6d62-4521-adf6-4c79104e4e77)

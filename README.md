@@ -1,5 +1,6 @@
 # Weather_Application
-Dynamic weather application created using HTML, CSS, JavaScript, Node.js
+Dynamic weather application created using HTML, CSS, JavaScript, Node.js.
+This application search weather based on city name.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -20,3 +21,16 @@ _Run below commnd on terminal_
 OR
 
     npx nodemon src/app.js -e js,hbs
+
+
+
+# Note
+_create config.js and below code in config.js_ || **Path: Weather-Application/config.js**
+
+    const constants = {
+         openWeatherMap: {
+                  BASE_URL: "https://api.openweathermap.org/data/2.5/weather?q=",
+                  SECRET_KEY: "Place Your API Key"
+         }
+    }
+    module.exports = constants;

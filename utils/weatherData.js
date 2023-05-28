@@ -17,7 +17,7 @@ const weatherData = (city, callback) => {
         } else {
             callback(undefined, {
                 temperature: body.main.temp,
-                description: body.weather[0].main,
+                main: body.weather[0].main,
                 cityName: body.name,
                 temperature_min: body.main.temp_min, 
                 temperature_max: body.main.temp_max,

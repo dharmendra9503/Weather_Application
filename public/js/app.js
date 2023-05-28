@@ -14,7 +14,7 @@ weatherForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     let city = search.value;
-    console.log(city);
+    // console.log(city);
 
     locationElement.textContent = "Loading...";
     temperature.textContent = "";
@@ -28,15 +28,15 @@ weatherForm.addEventListener('submit', (e) => {
                 temperature.textContent = "";
                 temperature_minmax.textContent = "";
             } else {
-                console.log()
+                console.log(data);
 
-                switch(data.description){
+                switch(data.main){
                     case "Sunny", "Clear":
                         weatherIcon.innerHTML = "<i class='fas fa-sharp fa-solid fa-sun fa-2xl' style='color: #eccc68;'></i>";
                         break;
 
-                    case "Rainy":
-                        weatherIcon.innerHTML = '<i class="fas fa-solid fa-cloud-rain fa-2xl"></i>';
+                    case "Rain":
+                        weatherIcon.innerHTML = '<i class="fas fa-solid fa-cloud-rain fa-2xl" style="color: #f1f2f6;"></i>';
                         break;
 
                     case "Smoke":

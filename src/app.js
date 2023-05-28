@@ -33,7 +33,7 @@ app.get('/weather', (req, res) => {
         })
     }
 
-    weatherData(city, (error, {temperature, description, cityName, temperature_min, temperature_max, countryCode} = {}) => {
+    weatherData(city, (error, {temperature, main, cityName, temperature_min, temperature_max, countryCode} = {}) => {
         if(error) {
             return res.send({
                 error
@@ -42,7 +42,7 @@ app.get('/weather', (req, res) => {
         // console.log(temperature, description, cityName, temperature_min, temperature_max);
         res.send({
             temperature,
-            description,
+            main,
             cityName,
             temperature_min,
             temperature_max,
